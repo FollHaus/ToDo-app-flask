@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="auth-links">
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}">Выйти</a>
+        {% endif %}
+    </div>
+
+    <h1>Мои задачи</h1>
+
+    <form method="POST">
+        <input type="text" name="title" placeholder="Название" required>
+        <textarea name="description" placeholder="Описание" rows="3"></textarea>
+        <input type="date" name="due_date" required>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <div class="task-list">
+        {% for task in tasks %}
+            <div class="task-item {% if task.completed %}completed{% endif %}">
+                <h3 class="task-title">{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
+                <p class="task-due">Дата: {{ task.due_date.strftime('%Y-%m-%d') }}</p>
+                <span class="task-status {% if task.completed %}completed{% else %}pending{% endif %}">
+                  {% if task.completed %}
+                    ✓ Выполнено
+                  {% else %}
+                    ⏳ Выполняется
+                  {% endif %}
+                </span>
+
+                <div class="task-actions">
+                    <a href="{{ url_for('edit_task', task_id=task.id) }}" class="edit-btn">
+                        Редактировать
+                    </a>
+                    <a href="{{ url_for('toggle_task', task_id=task.id) }}" class="toggle-btn">
+                        {{ 'Выполняю' if task.completed else 'Завершить' }}
+                    </a>
+                    <a href="{{ url_for('delete', task_id=task.id) }}" class="delete-btn">
+                        Удалить
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

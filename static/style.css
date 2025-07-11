@@ -1,0 +1,247 @@
+:root {
+  --primary-color: #4361ee;
+  --secondary-color: #3f37c9;
+  --accent-color: #4895ef;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --success-color: #4cc9f0;
+  --danger-color: #f72585;
+  --warning-color: #f8961e;
+  --completed-color: #e8f5e9; /* Светло-зеленый фон */
+  --completed-border: #81c784; /* Зеленая граница */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-color);
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+h1 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+/* Формы */
+form {
+  background: var(--light-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+  box-shadow: var(--box-shadow);
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-block;
+  width: auto;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* Список задач */
+.task-list {
+  margin-top: 2rem;
+}
+
+.task-item {
+  background: white;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  position: relative;
+  border-left: 4px solid var(--accent-color);
+}
+
+.task-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task-item.completed {
+  background-color: var(--completed-color);
+  border-left-color: var(--completed-border);
+  position: relative;
+  overflow: hidden;
+}
+.task-item.completed::after {
+  content: "✓";
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: var(--completed-border);
+  font-size: 1.5rem;
+  font-weight: bold;
+  opacity: 0.3;
+}
+
+/* Обновляем стиль текста в завершенных задачах */
+.task-item.completed .task-title,
+.task-item.completed p,
+.task-item.completed .task-due {
+  color: #2e7d32; /* Темно-зеленый текст */
+  opacity: 0.8;
+}
+
+.task-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+}
+
+.task-due {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.task-due::before {
+  content: "📅 ";
+}
+
+.task-status {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.task-status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.task-status.completed {
+  background-color: var(--completed-border);
+  color: white;
+}
+
+.task-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.task-actions a {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.task-actions .edit-btn {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.task-actions .toggle-btn {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.task-actions .delete-btn {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.task-actions a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Навигация */
+.auth-links {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.auth-links a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 1rem;
+  transition: var(--transition);
+}
+
+.auth-links a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.task-item {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .task-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .task-actions a {
+    width: 100%;
+    text-align: center;
+  }
+}
